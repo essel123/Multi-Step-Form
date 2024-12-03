@@ -1,0 +1,59 @@
+.label {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0px;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 13.79px;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: rgba(2, 41, 89, 1);
+
+
+}
+
+.input {
+    padding: 24px;
+    margin-top: 5px;
+    gap: 0px;
+    border-radius: 8px;
+    border: 1px solid rgba(214, 217, 230, 1);
+    opacity: 0px;
+    outline: none;
+}
+
+.input:focus {
+    border: 1px solid rgba(72, 62, 255, 1);
+}
+
+.input::placeholder {
+    font-family: 'ubuntu-bold';
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 18.38px;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: rgba(150, 153, 170, 1);
+    padding: 10px 0px;
+}
+
+
+
+
+@font-face {
+    font-family: 'ubuntu-bold';
+    src: url(../public/fonts/Ubuntu-Bold.ttf);
+}
+
+@media (max-width:450px) {
+
+    .input {
+        padding: 20px;
+        
+    }
+
+
+}

@@ -12,7 +12,18 @@
   src: url(../public/fonts/Ubuntu-Bold.ttf);
 }
 
+@font-face {
+  font-family: 'ubuntu-Regular';
+  src: url(../public/fonts/Ubuntu-Regular.ttf);
+}
+
+@font-face {
+  font-family: 'ubuntu-Medium';
+  src: url(../public/fonts/Ubuntu-Medium.ttf);
+}
+
 
 body{
   font-family: 'ubuntu-bold';
+  background: #fefafa;
 }

@@ -1,10 +1,11 @@
+import FormPage from "./components/molecules/FormPage/FormPage";
 
 function App() {
   return (
     <div>
-    <h1>Hello</h1>
+      <FormPage />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

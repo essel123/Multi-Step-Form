@@ -1,0 +1,32 @@
+
+.section{
+    width: 100%;
+}
+.title{
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 36.77px;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: rgba(2, 41, 89, 1);
+
+}
+
+.description{
+font-size: 15px;
+font-weight: 400;
+line-height: 25px;
+font-family: 'ubuntu-Medium';
+text-align: left;
+text-underline-position: from-font;
+text-decoration-skip-ink: none;
+color: rgba(150, 153, 170, 1);
+
+}
+
+
+@font-face {
+    font-family: 'ubuntu-Medium';
+    src: url(../public/fonts/Ubuntu-Medium.ttf);
+  }

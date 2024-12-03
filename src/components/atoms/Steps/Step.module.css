@@ -1,0 +1,70 @@
+.section {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    text-transform: uppercase;
+}
+
+
+.circle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 33px;
+    height: 33px;
+    border-radius: 50%;
+    border: 1px solid rgb(255, 255, 255);
+}
+
+.id {
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 16.09px;
+    letter-spacing: 1px;
+    text-align: center;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+}
+
+.stepid {
+    font-family: 'ubuntu-Regular';
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 13.79px;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: rgba(171, 188, 255, 1);
+
+}
+
+.formtitle {
+    font-family: 'ubuntu-Regular';
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 16.09px;
+    letter-spacing: 1px;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: rgba(255, 255, 255, 1);
+
+}
+
+.formdetails {
+    display: flex;
+    flex-direction: column;
+}
+
+@media (max-width:450px) {
+    .formdetails {
+        display: none;
+    }
+
+}
+
+
+@font-face {
+    font-family: 'ubuntu-Regular';
+    src: url(../public/fonts/Ubuntu-Regular.ttf);
+}
