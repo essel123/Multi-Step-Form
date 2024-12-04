@@ -5,6 +5,9 @@ import * as React from "react";
 type Props = {
   id: number;
   formtitle: string;
+  id_color: string;
+  id_bg_color: string;
+  border_color: string;
 };
 
 export class Step extends React.Component<Props> {
@@ -12,8 +15,13 @@ export class Step extends React.Component<Props> {
     return (
       <div>
         <section className={styles.section}>
-          <div className={styles.circle}>
-            <h1 className={styles.id}>
+          <div
+            className={styles.circle}
+            style={{ background: `${this.props.id_bg_color}`,
+              border: `1px solid ${this.props.border_color}`
+             }}
+          >
+            <h1 className={styles.id} style={{color:`${this.props.id_color}`}}>
               {this.props.id}
             </h1>
           </div>
@@ -22,7 +30,7 @@ export class Step extends React.Component<Props> {
               step {this.props.id}
             </h2>
             <h1 className={styles.formtitle}>
-             {this.props.formtitle}
+              {this.props.formtitle}
             </h1>
           </div>
         </section>

@@ -1,8 +1,20 @@
 import styles from "./NavButtons.module.css";
+// @flow
+import * as React from 'react';
+type Props = {
+   nextClick: ()=>void,
 
-export default function NavButtons() {
-  return <div className={styles.btn}>
-        <button className={styles.prevbtn}> Go Back</button>
-        <button className={styles.nextbtn}> Next Step</button>
+   prevClick: ()=>void,
+};
+
+ class NavButtons extends React.Component<Props>{
+  render() {
+     return <div className={styles.btn}>
+        <button className={styles.prevbtn} onClick={this.props.prevClick}> Go Back</button>
+        <button onClick={this.props.nextClick} className={styles.nextbtn}> Next Step</button>
      </div>;
-}
+  };
+};
+
+
+export default NavButtons;

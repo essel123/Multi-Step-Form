@@ -13,7 +13,9 @@
     width: 33px;
     height: 33px;
     border-radius: 50%;
+    background: rgba(190, 226, 253, 1);
     border: 1px solid rgb(255, 255, 255);
+    transition: background 0.3s ease;
 }
 
 .id {
@@ -22,6 +24,7 @@
     line-height: 16.09px;
     letter-spacing: 1px;
     text-align: center;
+  
     text-underline-position: from-font;
     text-decoration-skip-ink: none;
 }

@@ -3,13 +3,8 @@
     display: flex;
     flex-direction: column;
     margin: 15px 0px;
-    font-size: 12px;
-    font-weight: 400;
-    line-height: 13.79px;
-    text-align: left;
-    text-underline-position: from-font;
-    text-decoration-skip-ink: none;
-    color: rgba(2, 41, 89, 1);
+    
+    
 
 
 }
@@ -20,8 +15,16 @@
     gap: 0px;
     border-radius: 8px;
     border: 1px solid rgba(214, 217, 230, 1);
-    opacity: 0px;
     outline: none;
+    color: rgba(2, 41, 89, 1);
+    font-family: 'ubuntu-bold';
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 18.38px;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+
 }
 
 .input:focus {
@@ -41,8 +44,6 @@
 }
 
 
-
-
 @font-face {
     font-family: 'ubuntu-bold';
     src: url(../public/fonts/Ubuntu-Bold.ttf);
@@ -52,7 +53,7 @@
 
     .input {
         padding: 20px;
-        
+
     }
 
 
