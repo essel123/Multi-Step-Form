@@ -24,7 +24,6 @@
     line-height: 16.09px;
     letter-spacing: 1px;
     text-align: center;
-  
     text-underline-position: from-font;
     text-decoration-skip-ink: none;
 }
@@ -48,6 +47,7 @@
     line-height: 16.09px;
     letter-spacing: 1px;
     text-align: left;
+    margin-top: 10px;
     text-underline-position: from-font;
     text-decoration-skip-ink: none;
     color: rgba(255, 255, 255, 1);
@@ -69,5 +69,5 @@
 
 @font-face {
     font-family: 'ubuntu-Regular';
-    src: url(../public/fonts/Ubuntu-Regular.ttf);
+    src: url(./fonts/Ubuntu-Regular.ttf);
 }

@@ -17,11 +17,15 @@ export class Step extends React.Component<Props> {
         <section className={styles.section}>
           <div
             className={styles.circle}
-            style={{ background: `${this.props.id_bg_color}`,
+            style={{
+              background: `${this.props.id_bg_color}`,
               border: `1px solid ${this.props.border_color}`
-             }}
+            }}
           >
-            <h1 className={styles.id} style={{color:`${this.props.id_color}`}}>
+            <h1
+              className={styles.id}
+              style={{ color: `${this.props.id_color}` }}
+            >
               {this.props.id}
             </h1>
           </div>

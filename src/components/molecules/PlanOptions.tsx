@@ -24,15 +24,17 @@ function PlanOptions() {
                 selectedPlan = index;
                 setSelectedPlan(selectedPlan);
 
-                if (selectedPlan === index) {
+                if (index === selectedPlan) {
                   setborderColor("rgba(72, 62, 255, 1)");
                 }
               }}
               isBenefit={plan}
               benefit={dt.benefit}
-              borderColor={`${borderColor}`}
+              borderColor={`${index === selectedPlan
+                ? borderColor
+                : "rgba(214, 217, 230, 1)"}`}
               icon={dt.icon}
-              planprice={ plan? dt.yearplan : dt.monthplan}
+              planprice={plan ? dt.yearplan : dt.monthplan}
               title={dt.title}
               key={index}
             />

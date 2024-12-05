@@ -21,7 +21,12 @@ export class Toggler extends React.Component<Props> {
             Monthly
           </h3>
           <label className={styles.switch}>
-            <input type="checkbox" id="mode" onClick={this.props.handleclick} checked={this.props.checked} />
+            <input
+              type="checkbox"
+              id="mode"
+              onClick={this.props.handleclick}
+              checked={this.props.checked}
+            />
             <span className={`${styles.slider} ${styles.round}`} />
           </label>
           <h3

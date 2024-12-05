@@ -5,9 +5,7 @@ type Props = {
   title: string;
   description: string;
 };
-// type State = {
 
-// };
 export class StepTitle extends React.Component<Props> {
   render() {
     return (
