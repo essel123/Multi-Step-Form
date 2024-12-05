@@ -7,7 +7,7 @@ type Props = {
   type: string;
   value: string;
   placeholder: string;
-  onChange: (event: never) => void;
+  onChange: () => void;
 };
 export class InputField extends React.Component<Props> {
   render() {
