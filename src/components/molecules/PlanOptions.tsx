@@ -1,4 +1,4 @@
-import { PlanOption, usePersistedState } from "../functions/Data";
+import { PlanOption, usePersistedState } from "../../function/Functions";
 import { Plan } from "./Plan/Plan";
 
 import "../../App.css";

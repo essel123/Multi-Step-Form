@@ -62,7 +62,7 @@ const Finishing: React.FC<Props> = ({ onClick }) => {
 
         <div className={styles.total}>
           <h2>
-            Total (per `${plan === "true" ? "year" : "month"}`)
+            Total (per {plan === "true" ? "year" : "month"})
           </h2>
           <h3>
             ${totalAddonsPrice +

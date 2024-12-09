@@ -5,8 +5,8 @@ import {
   StepDetails,
   usePersistedState,
   Fields,
-  registeredData
-} from "../../functions/Data";
+  reDirectToHomePage
+} from "../../../function/Functions";
 import { Step } from "../../atoms/Steps/Step";
 import { StepTitle } from "../../atoms/StepTitle/StepTitle";
 
@@ -19,32 +19,6 @@ import { InputField } from "../../atoms/InputField/InputField";
 import { useState } from "react";
 
 const FormPage: React.FC = () => {
-  function remove(item: string) {
-    localStorage.removeItem(item);
-  }
-  const reDirectToHomePage = () => {
-    setTimeout(() => {
-      registeredData();
-      localStorage.setItem("isFormStarted", "false");
-      window.location.reload();
-      remove("plan");
-      remove("name");
-      remove("address");
-      remove("number");
-      remove("borderColor");
-      remove("planoption");
-      remove("planvalue");
-      remove("checked");
-      remove("checked1");
-      remove("checked2");
-      remove("checkedStates");
-      remove('selectedAddons')
-      remove("selectedPlan");
-      localStorage.setItem("nextPage", "0");
-      localStorage.setItem("isFormCompleted", "false");
-    }, 2000);
-  };
-  // Persisted state for form progress and form completion status
   const [nextPage, setNextPage] = usePersistedState("nextPage", 0);
   const [isFormCompleted, setFormCompleted] = usePersistedState(
     "isFormCompleted",
@@ -84,6 +58,8 @@ const FormPage: React.FC = () => {
     }
   };
 
+
+
   const handleGoBack = () => {
     setNextPage(nextPage - 1);
     setFormCompleted(false); // Reset completion status on going back
@@ -110,7 +86,7 @@ const FormPage: React.FC = () => {
                   } else {
                     setNumber(event.target.value);
                   }
-                  checkEmptyFields(); // Recheck empty fields whenever input changes
+                  checkEmptyFields(); 
                 }}
                 required={
                   emptyFields[
@@ -168,6 +144,18 @@ const FormPage: React.FC = () => {
               {Steps().map((dt, id) =>
                 <li className={styles.li} key={id}>
                   <Step
+                  handleClick={()=>{
+                    if (nextPage === 0) {
+                      checkEmptyFields();
+                      if (name.trim() === "" || address.trim() === "" || number.trim() === "") {
+                        checkEmptyFields();
+                      } else {
+                        setNextPage(id); // Proceed to next page if validation passes
+                      }
+                    } else {
+                      setNextPage(id); // Move to the next page
+                    }
+                  }}
                     id_bg_color={
                       isFormCompleted
                         ? "transparent"

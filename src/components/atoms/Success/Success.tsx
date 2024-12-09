@@ -1,8 +1,9 @@
 import styles from "./Succes.module.css";
+import '../../../App.css'
 
 export default function Success() {
   return (
-    <div>
+    <div className="slide-in">
       <section className={styles.section}>
         <img src="../../../../public/images/icon-thank-you.svg" alt="" />
         <h1 className={styles.thanks}>Thank you!</h1>
@@ -15,3 +16,4 @@ export default function Success() {
     </div>
   );
 }
+

@@ -7,7 +7,6 @@ type Props = {
   term: string;
   rate: number;
   term_: string;
-
   onClick: () => void;
 };
 

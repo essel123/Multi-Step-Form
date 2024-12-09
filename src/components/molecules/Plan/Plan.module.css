@@ -6,25 +6,26 @@
     max-width: 160px;
     border-radius: 5px;
     cursor: pointer;
-    transition:0.3s ease;
+    transition: 0.3s ease;
 }
 
-.benefit{
-font-family: 'ubuntu-regular';
-font-size: 12px;
-font-weight: 400;
-line-height: 13.79px;
-text-align: left;
-text-underline-position: from-font;
-text-decoration-skip-ink: none;
-color: rgba(2, 41, 89, 1);
+.benefit {
+    font-family: 'ubuntu-regular';
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 13.79px;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: rgba(2, 41, 89, 1);
 
 }
-.section:hover{
+
+.section:hover {
     border: 1px solid rgba(72, 62, 255, 1);
 }
 
-.section:active{
+.section:active {
     border: 1px solid rgba(72, 62, 255, 1);
 }
 
@@ -65,9 +66,20 @@ color: rgba(2, 41, 89, 1);
 
 
 @media (max-width:450px) {
-    .section{
-        width: 250px;
-        
+    .section {
+        margin-top: 12px;
+        padding: auto;
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        gap: 10px;
+        max-width: 375px !important;
+        width: 100%;
     }
-     
-   }
+
+    .textsection{
+        margin-top: 0px;
+    }
+
+   
+}

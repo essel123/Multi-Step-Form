@@ -62,7 +62,6 @@ const StepDetails = () => {
 
 const registeredData = () =>{
 
-
   const userData =  {
     name: localStorage.getItem('name'),
     addres: localStorage.getItem('address'),
@@ -75,9 +74,10 @@ const registeredData = () =>{
 
   }
 
-
    const data = JSON.stringify(userData)
  localStorage.setItem('userData',data)
+
+ return (data);
 }
 
 const name = localStorage.getItem('name');
@@ -169,7 +169,31 @@ const addonData = () =>{
   
 }
 
-
+function remove(item: string) {
+  localStorage.removeItem(item);
+}
+const reDirectToHomePage = () => {
+  setTimeout(() => {
+    registeredData();
+    localStorage.setItem("isFormStarted", "false");
+    window.location.reload();
+    remove("plan");
+    remove("name");
+    remove("address");
+    remove("number");
+    remove("borderColor");
+    remove("planoption");
+    remove("planvalue");
+    remove("checked");
+    remove("checked1");
+    remove("checked2");
+    remove("checkedStates");
+    remove('selectedAddons')
+    remove("selectedPlan");
+    localStorage.setItem("nextPage", "0");
+    localStorage.setItem("isFormCompleted", "false");
+  }, 2000);
+}
 
 // eslint-disable-next-line react-refresh/only-export-components
-export { Steps, StepDetails, usePersistedState,PlanOption,Fields,registeredData,addonData};
+export { Steps, StepDetails, usePersistedState,PlanOption,Fields,registeredData,addonData,reDirectToHomePage};

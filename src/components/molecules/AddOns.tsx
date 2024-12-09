@@ -1,16 +1,14 @@
 import { AddOn } from "./Add-on/AddOn";
-import { addonData, usePersistedState } from "../functions/Data";
+import { addonData, usePersistedState } from "../../function/Functions";
 import "../../App.css";
 
 function AddOns() {
   const plantype = localStorage.getItem("plan") === "true";
   const [checkedStates, setCheckedStates] = usePersistedState("checkedStates", [false, false, false]);
-
   const handleCheckboxChange = (index: number, addon: any) => {
     const newCheckedStates = [...checkedStates];
     newCheckedStates[index] = !newCheckedStates[index];
     setCheckedStates(newCheckedStates);
-
     const selectedAddon = {
       name: addon.name,
       plan: plantype ? addon.yrAddon : addon.moAddon

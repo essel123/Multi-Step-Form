@@ -1,5 +1,5 @@
 import Subscribe from "./components/atoms/HomePage/Subscribe";
-import { usePersistedState } from "./components/functions/Data";
+import { usePersistedState } from "./function/Functions";
 import FormPage from "./components/molecules/FormPage/FormPage";
 import './App.css'
 

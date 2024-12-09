@@ -8,13 +8,14 @@ type Props = {
   id_color: string;
   id_bg_color: string;
   border_color: string;
+  handleClick: () => void;
 };
 
 export class Step extends React.Component<Props> {
   render() {
     return (
       <div>
-        <section className={styles.section}>
+        <section className={styles.section} onClick={this.props.handleClick}>
           <div
             className={styles.circle}
             style={{

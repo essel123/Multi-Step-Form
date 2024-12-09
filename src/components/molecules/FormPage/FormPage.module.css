@@ -38,8 +38,9 @@
     max-width: 274px;
     background-image: url('./images/bg-sidebar-desktop.svg');
     background-position: start;
-    height: 568px;
+    height: 500px;
     background-repeat: no-repeat;
+    border-radius: 12px;
 
 }
 
@@ -64,10 +65,19 @@
 
 
 
-.center{
+.center {
     border-radius: 20px !important;
 }
+
 @media (max-width:450px) {
+    .main {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        padding: 0px !important;
+    }
+
     .leftaside {
         display: flex;
         justify-content: center;
@@ -75,12 +85,27 @@
         background-image: url('./images/bg-sidebar-mobile.svg');
         background-position: start;
         width: 100%;
-        max-width: 500px;
+        max-width: 100%;
+        border-radius: 0px !important;
         height: 172px;
     }
 
-    .center {
+    .mobileview{
+        position: relative;
+        background: #ffffff;
+        max-width: 375px;
+        padding: 10px;
+        border-radius: 12px;
 
+    }
+
+    .rightaside {
+        display: flex;
+        top: -80px;
+       
+    }
+
+    .center {
         background: transparent;
         display: flex;
         justify-content: center;
@@ -89,20 +114,15 @@
         padding: 0;
     }
 
-    /* .mobileview{
-        position: absolute;
-        top: -10%;
-        background: #000;
-        max-width: 343px;
-    } */
-
     ul {
         display: flex;
         gap: 30px;
     }
 
     .bottom {
-        bottom: -5px;
+      background: #ffffff;
+      padding: 5px;
+        bottom: 0px;
     }
 
 }

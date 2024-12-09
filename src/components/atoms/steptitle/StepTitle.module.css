@@ -26,6 +26,16 @@
 
 }
 
+@media (max-width:450px) {
+    
+    .title{
+        font-size: 24px;
+    }
+    .description{
+        font-size: 14px;
+    }
+}
+
 
 @font-face {
     font-family: 'ubuntu-Medium';

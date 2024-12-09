@@ -74,6 +74,23 @@
     gap: 10px;
 }
 
+
+@media (max-width:450px) {
+    .section{
+        padding: 15px 15px;
+    }
+    .name{
+        font-size: 14px;
+    }
+    .description{
+        font-size: 12px;
+    }
+    .plan{
+        font-size: 12px;
+    }
+    
+}
+
 @font-face {
     font-family: 'ubuntu-Regular';
     src: url(./fonts/Ubuntu-Regular.ttf);
