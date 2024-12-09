@@ -9,17 +9,17 @@
 
 @font-face {
   font-family: 'ubuntu-bold';
-  src: url(./fonts/Ubuntu-Bold.ttf);
+  src: url(../public/fonts/Ubuntu-Bold.ttf);
 }
 
 @font-face {
   font-family: 'ubuntu-regular';
-  src: url(./fonts/Ubuntu-Regular.ttf);
+  src: url(../public/fonts/Ubuntu-Regular.ttf);
 }
 
 @font-face {
   font-family: 'ubuntu-medium';
-  src: url(./fonts/Ubuntu-Medium.ttf);
+  src: url(../public/fonts/Ubuntu-Medium.ttf);
 }
 
 

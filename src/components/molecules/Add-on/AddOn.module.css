@@ -52,7 +52,7 @@
 }
 
 .checkbox::before {
-    content: url("./images/icon-checkmark.svg");
+    content: url("../../../../public/images/icon-checkmark.svg");
     display: flex;
     justify-content: center;
     align-items: center;
@@ -93,11 +93,11 @@
 
 @font-face {
     font-family: 'ubuntu-Regular';
-    src: url(./fonts/Ubuntu-Regular.ttf);
+    src: url('../../../../public/fonts/Ubuntu-Regular.ttf');
 }
 
 
 @font-face {
     font-family: 'ubuntu-Medium';
-    src: url(./fonts/Ubuntu-Medium.ttf);
+    src: url('../../../../public/fonts/Ubuntu-Medium.ttf');
 }
