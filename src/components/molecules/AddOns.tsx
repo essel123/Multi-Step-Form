@@ -4,7 +4,11 @@ import "../../App.css";
 
 function AddOns() {
   const plantype = localStorage.getItem("plan") === "true";
-  const [checkedStates, setCheckedStates] = usePersistedState("checkedStates", [false, false, false]);
+  const [checkedStates, setCheckedStates] = usePersistedState("checkedStates", [
+    false,
+    false,
+    false
+  ]);
   const handleCheckboxChange = (index: number, addon: any) => {
     const newCheckedStates = [...checkedStates];
     newCheckedStates[index] = !newCheckedStates[index];
@@ -14,12 +18,16 @@ function AddOns() {
       plan: plantype ? addon.yrAddon : addon.moAddon
     };
 
-    let selectedAddons = JSON.parse(localStorage.getItem("selectedAddons") || "[]");
+    let selectedAddons = JSON.parse(
+      localStorage.getItem("selectedAddons") || "[]"
+    );
 
     if (newCheckedStates[index]) {
       selectedAddons.push(selectedAddon);
     } else {
-      selectedAddons = selectedAddons.filter((item: any) => item.name !== addon.name);
+      selectedAddons = selectedAddons.filter(
+        (item: any) => item.name !== addon.name
+      );
     }
 
     localStorage.setItem("selectedAddons", JSON.stringify(selectedAddons));

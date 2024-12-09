@@ -2,18 +2,15 @@
   display: flex;
   justify-content: space-between;
   margin-bottom: 50px;
-
 }
 
-
-@media (max-width:450px) {
-  .planoptions{
+@media (max-width: 450px) {
+  .planoptions {
     display: flex;
     flex-direction: column;
     width: 100%;
     margin-bottom: 20px;
   }
-  
 }
 
 @keyframes slideInRight {
@@ -28,94 +25,6 @@
   }
 }
 
-
 .slide-in {
   animation: slideInRight 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
-}
-
-
-
-/* Overall container styling */
-/* div {
-  font-family: 'Arial', sans-serif;
-  text-align: center;
-  margin-top: 50px;
-}
-
-h2 {
-  font-size: 2rem;
-  color: #2d2d2d;
-  margin-bottom: 20px;
-}
-
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  margin: 20px 0;
-}
-
-
-button {
-  background-color: #4CAF50; 
-  color: white;
-  font-size: 1.1rem;
-  padding: 15px 30px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-button:hover {
-  background-color: #45a049;
-  transform: translateY(-3px);
-}
-
-button:active {
-  transform: translateY(1px);
-}
-
-
-button.selected {
-  background-color: #ff9800; /* Orange */
-/* box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-} */
-
-
-/* div.selected-plan {
-  margin-top: 30px;
-  background-color: #f4f4f9;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-}
-
-div.selected-plan h3 {
-  color: #333;
-  font-size: 1.5rem;
-}
-
-div.selected-plan p {
-  font-size: 1.2rem;
-  color: #555;
-}  */
-
-/* Animation for Plan Selection */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-}
-
-div.selected-plan {
-  animation: fadeIn 0.5s ease-out;
 }

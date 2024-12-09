@@ -5,9 +5,8 @@ type Props = {
   name: string;
   description: string;
   plan: string;
-  onChange: (event:React.ChangeEvent<HTMLInputElement>) => void;
-  checked:boolean;
-
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  checked: boolean;
 };
 
 export class AddOn extends React.Component<Props> {

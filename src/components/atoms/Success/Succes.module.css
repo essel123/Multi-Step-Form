@@ -1,37 +1,32 @@
 .section {
-    margin-top: 100px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
+  margin-top: 100px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .thanks {
-   
-    font-family: 'ubuntu-bold';
-    font-size: 32px;
-    font-weight: 700;
-    line-height: 36.77px;
-    text-align: center;
-    text-underline-position: from-font;
-    text-decoration-skip-ink: none;
-    margin-top: 32px;
-    color: rgba(2, 41, 89, 1);
+  font-family: 'ubuntu-bold';
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 36.77px;
+  text-align: center;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  margin-top: 32px;
+  color: rgba(2, 41, 89, 1);
 }
 
 .thanksMessage {
-
-    margin-top: 32px;
-    font-family: 'ubuntu-regular';
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 25px;
-    text-align: center;
-    text-underline-position: from-font;
-    text-decoration-skip-ink: none;
-    color: rgba(150, 153, 170, 1);
-
-
+  margin-top: 32px;
+  font-family: 'ubuntu-regular';
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 25px;
+  text-align: center;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  color: rgba(150, 153, 170, 1);
 }

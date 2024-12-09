@@ -1,29 +1,27 @@
 .section {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: rgba(2, 41, 89, 1);
-    font-family: 'ubuntu-regular';
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 18.38px;
-    text-align: left;
-    text-underline-position: from-font;
-    text-decoration-skip-ink: none;
-
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: rgba(2, 41, 89, 1);
+  font-family: 'ubuntu-regular';
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 18.38px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
 }
 
-.change{
-    padding: 20px 0px;
-    text-decoration: underline;
-    color: rgba(150, 153, 170, 1);
-    font-weight: 400;
-    cursor: pointer;
-    transition: 0.3s;
+.change {
+  padding: 20px 0px;
+  text-decoration: underline;
+  color: rgba(150, 153, 170, 1);
+  font-weight: 400;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
-.change:hover{
-    color: rgba(72, 62, 255, 1);
+.change:hover {
+  color: rgba(72, 62, 255, 1);
 }
-

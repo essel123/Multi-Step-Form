@@ -58,8 +58,6 @@ const FormPage: React.FC = () => {
     }
   };
 
-
-
   const handleGoBack = () => {
     setNextPage(nextPage - 1);
     setFormCompleted(false); // Reset completion status on going back
@@ -86,7 +84,7 @@ const FormPage: React.FC = () => {
                   } else {
                     setNumber(event.target.value);
                   }
-                  checkEmptyFields(); 
+                  checkEmptyFields();
                 }}
                 required={
                   emptyFields[
@@ -144,18 +142,22 @@ const FormPage: React.FC = () => {
               {Steps().map((dt, id) =>
                 <li className={styles.li} key={id}>
                   <Step
-                  handleClick={()=>{
-                    if (nextPage === 0) {
-                      checkEmptyFields();
-                      if (name.trim() === "" || address.trim() === "" || number.trim() === "") {
+                    handleClick={() => {
+                      if (nextPage === 0) {
                         checkEmptyFields();
+                        if (
+                          name.trim() === "" ||
+                          address.trim() === "" ||
+                          number.trim() === ""
+                        ) {
+                          checkEmptyFields();
+                        } else {
+                          setNextPage(id); // Proceed to next page if validation passes
+                        }
                       } else {
-                        setNextPage(id); // Proceed to next page if validation passes
+                        setNextPage(id); // Move to the next page
                       }
-                    } else {
-                      setNextPage(id); // Move to the next page
-                    }
-                  }}
+                    }}
                     id_bg_color={
                       isFormCompleted
                         ? "transparent"

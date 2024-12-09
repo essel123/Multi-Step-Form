@@ -6,7 +6,7 @@ type Props = {
   name: string;
   type: string;
   value: string;
-  required :string
+  required: string;
   placeholder: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   borderstyle: string;
@@ -31,7 +31,6 @@ export class InputField extends React.Component<Props> {
             value={this.props.value}
             placeholder={` e.g. ${this.props.placeholder}`}
             style={{ border: `${this.props.borderstyle}` }}
-           
           />
         </label>
       </div>

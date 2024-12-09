@@ -1,43 +1,39 @@
 .section {
-    width: 100%;
+  width: 100%;
 }
 
 .title {
-    font-family: 'ubuntu-bold';
-    font-size: 32px;
-    font-weight: 700;
-    line-height: 36.77px;
-    text-align: left;
-    text-underline-position: from-font;
-    text-decoration-skip-ink: none;
-    color: rgba(2, 41, 89, 1);
-
+  font-family: 'ubuntu-bold';
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 36.77px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  color: rgba(2, 41, 89, 1);
 }
 
 .description {
-    font-size: 15px;
-    font-weight: 400;
-    line-height: 25px;
-    font-family: 'ubuntu-Medium';
-    text-align: left;
-    text-underline-position: from-font;
-    text-decoration-skip-ink: none;
-    color: rgba(150, 153, 170, 1);
-
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 25px;
+  font-family: 'ubuntu-Medium';
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  color: rgba(150, 153, 170, 1);
 }
 
-@media (max-width:450px) {
-    
-    .title{
-        font-size: 24px;
-    }
-    .description{
-        font-size: 14px;
-    }
+@media (max-width: 450px) {
+  .title {
+    font-size: 24px;
+  }
+  .description {
+    font-size: 14px;
+  }
 }
-
 
 @font-face {
-    font-family: 'ubuntu-Medium';
-    src: url(./fonts/Ubuntu-Medium.ttf);
+  font-family: 'ubuntu-Medium';
+  src: url(./fonts/Ubuntu-Medium.ttf);
 }

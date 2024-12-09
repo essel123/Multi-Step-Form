@@ -17,7 +17,6 @@ function PlanOptions() {
     "rgba(214, 217, 230, 1)"
   );
 
-
   return (
     <div className="slide-in">
       <div className="planoptions">
@@ -58,7 +57,6 @@ function PlanOptions() {
         yearcolor={plan ? " rgba(150, 153, 170, 1)" : "rgba(2, 41, 89, 1)"}
         handleclick={() => {
           setplan(!plan);
-
         }}
       />
     </div>

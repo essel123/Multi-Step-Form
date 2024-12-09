@@ -1,7 +1,7 @@
 import Subscribe from "./components/atoms/HomePage/Subscribe";
 import { usePersistedState } from "./function/Functions";
 import FormPage from "./components/molecules/FormPage/FormPage";
-import './App.css'
+import "./App.css";
 
 function App() {
   const [isFormStarted, setFormStarted] = usePersistedState(
@@ -18,7 +18,7 @@ function App() {
         ? <FormPage />
         : <Subscribe
             handleClick={() => {
-              handleClick()
+              handleClick();
             }}
           />}
     </div>

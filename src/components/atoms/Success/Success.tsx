@@ -1,5 +1,5 @@
 import styles from "./Succes.module.css";
-import '../../../App.css'
+import "../../../App.css";
 
 export default function Success() {
   return (
@@ -16,4 +16,3 @@ export default function Success() {
     </div>
   );
 }
-
