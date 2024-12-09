@@ -39,11 +39,24 @@
 }
 
 .checkbox {
+    border: 1px solid grey;
     width: 20px;
-    padding: 5px;
+    height: 20px;
     cursor: pointer;
+    -webkit-appearance: none;
 }
 
+
+.checkbox:checked{
+    background: rgba(72, 62, 255, 1);
+}
+
+.checkbox::before {
+    content: url("./images/icon-checkmark.svg");
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 .section:hover {
     border: 1px solid rgba(72, 62, 255, 1);
@@ -56,16 +69,18 @@
 
 .leftside {
     display: flex;
+    justify-content: center;
+    align-items: center;
     gap: 10px;
 }
 
 @font-face {
     font-family: 'ubuntu-Regular';
-    src: url(../public/fonts/Ubuntu-Regular.ttf);
+    src: url(./fonts/Ubuntu-Regular.ttf);
 }
 
 
 @font-face {
     font-family: 'ubuntu-Medium';
-    src: url(../public/fonts/Ubuntu-Medium.ttf);
+    src: url(./fonts/Ubuntu-Medium.ttf);
 }

@@ -1,24 +1,164 @@
 import styles from "./FormPage.module.css";
 
-import { Steps, StepDetails, usePersistedState } from "../../functions/Data";
+import {
+  Steps,
+  StepDetails,
+  usePersistedState,
+  Fields,
+  registeredData
+} from "../../functions/Data";
 import { Step } from "../../atoms/Steps/Step";
 import { StepTitle } from "../../atoms/StepTitle/StepTitle";
 
-import Info from "../Info";
 import PlanOptions from "../PlanOptions";
 import AddOns from "../AddOns";
 import { Button } from "../../atoms/Button/Button";
 import Finishing from "../Finishing/Finishing";
+import Success from "../../atoms/Success/Success";
+import { InputField } from "../../atoms/InputField/InputField";
+import { useState } from "react";
 
-function FormPage() {
-  const [nextPage, setnextPage] = usePersistedState("nextPage", 0);
+const FormPage: React.FC = () => {
+  function remove(item: string) {
+    localStorage.removeItem(item);
+  }
+  const reDirectToHomePage = () => {
+    setTimeout(() => {
+      registeredData();
+      localStorage.setItem("isFormStarted", "false");
+      window.location.reload();
+      remove("plan");
+      remove("name");
+      remove("address");
+      remove("number");
+      remove("borderColor");
+      remove("planoption");
+      remove("planvalue");
+      remove("checked");
+      remove("checked1");
+      remove("checked2");
+      remove("checkedStates");
+      remove('selectedAddons')
+      remove("selectedPlan");
+      localStorage.setItem("nextPage", "0");
+      localStorage.setItem("isFormCompleted", "false");
+    }, 2000);
+  };
+  // Persisted state for form progress and form completion status
+  const [nextPage, setNextPage] = usePersistedState("nextPage", 0);
+  const [isFormCompleted, setFormCompleted] = usePersistedState(
+    "isFormCompleted",
+    false
+  );
 
-  // function isEmpty(str:string) {
-  //   return str.trim().length === 0;
-  // }
-  // const name = localStorage.getItem("name");
-  // const address = localStorage.getItem("address");
-  // const number = localStorage.getItem("number");
+  // Form field states
+  const [name, setName] = usePersistedState("name", "");
+  const [address, setAddress] = usePersistedState("address", "");
+  const [number, setNumber] = usePersistedState("number", "");
+  const [emptyFields, setEmptyFields] = useState({
+    name: false,
+    address: false,
+    number: false
+  });
+
+  // Function to check if fields are empty
+  const checkEmptyFields = () => {
+    setEmptyFields({
+      name: name.trim() === "",
+      address: address.trim() === "",
+      number: number.trim() === ""
+    });
+  };
+
+  // Handler for form submission (validation and progress)
+  const handleNextPage = () => {
+    if (nextPage === 0) {
+      checkEmptyFields();
+      if (name.trim() === "" || address.trim() === "" || number.trim() === "") {
+        checkEmptyFields();
+      } else {
+        setNextPage(nextPage + 1); // Proceed to next page if validation passes
+      }
+    } else {
+      setNextPage(nextPage + 1); // Move to the next page
+    }
+  };
+
+  const handleGoBack = () => {
+    setNextPage(nextPage - 1);
+    setFormCompleted(false); // Reset completion status on going back
+  };
+
+  const renderFormContent = () => {
+    const fields = Fields();
+    switch (nextPage) {
+      case 0:
+        return (
+          <form className="slide-in">
+            {fields.map((field, index) =>
+              <InputField
+                key={index}
+                name={field.name}
+                placeholder={field.placeholder}
+                type={field.type}
+                value={index === 0 ? name : index === 1 ? address : number}
+                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                  if (index === 0) {
+                    setName(event.target.value);
+                  } else if (index === 1) {
+                    setAddress(event.target.value);
+                  } else {
+                    setNumber(event.target.value);
+                  }
+                  checkEmptyFields(); // Recheck empty fields whenever input changes
+                }}
+                required={
+                  emptyFields[
+                    index === 0 ? "name" : index === 1 ? "address" : "number"
+                  ]
+                    ? "This field is required"
+                    : ""
+                }
+                borderstyle={
+                  emptyFields[
+                    index === 0 ? "name" : index === 1 ? "address" : "number"
+                  ]
+                    ? "1px solid rgba(238, 55, 74, 1)"
+                    : "1px solid #ccc"
+                }
+              />
+            )}
+          </form>
+        );
+      case 1:
+        return <PlanOptions />;
+      case 2:
+        return <AddOns />;
+      case 3:
+        return isFormCompleted
+          ? <Success />
+          : <Finishing onClick={() => setNextPage(1)} />;
+      default:
+        return null;
+    }
+  };
+
+  const renderStepDetails = () => {
+    const steps = StepDetails();
+    return steps.map((dt, index) => {
+      if (index === nextPage) {
+        return (
+          <StepTitle
+            key={index}
+            description={dt.description}
+            title={dt.title}
+          />
+        );
+      }
+      return null;
+    });
+  };
+
   return (
     <div>
       <main className={styles.main}>
@@ -27,21 +167,27 @@ function FormPage() {
             <ul>
               {Steps().map((dt, id) =>
                 <li className={styles.li} key={id}>
-                  {
-                    <Step
-                      id_bg_color={
-                        id === nextPage
+                  <Step
+                    id_bg_color={
+                      isFormCompleted
+                        ? "transparent"
+                        : id === nextPage
                           ? "rgba(190, 226, 253, 1)"
                           : "transparent"
-                      }
-                      id_color={
-                        id === nextPage ? "rgba(2, 41, 89, 1)" : "white"
-                      }
-                      border_color={id === nextPage ? "transparent" : " white"}
-                      formtitle={dt.title}
-                      id={dt.id}
-                    />
-                  }
+                    }
+                    id_color={
+                      isFormCompleted
+                        ? "white"
+                        : id === nextPage ? "rgba(2, 41, 89, 1)" : "white"
+                    }
+                    border_color={
+                      isFormCompleted
+                        ? "white"
+                        : id === nextPage ? "transparent" : "white"
+                    }
+                    formtitle={dt.title}
+                    id={dt.id}
+                  />
                 </li>
               )}
             </ul>
@@ -49,60 +195,43 @@ function FormPage() {
 
           <aside className={styles.rightaside}>
             <div className={styles.mobileview}>
-              {StepDetails().map((dt, index) => {
-                if (index === nextPage) {
-                  return (
-                    <StepTitle description={dt.description} title={dt.title} />
-                  );
-                }
-              })}
-              {nextPage === 0
-                ? <form action="">
-                    <Info />
-                  </form>
-                : nextPage === 1
-                  ? <PlanOptions />
-                  : nextPage === 2
-                    ? <AddOns />
-                    : <Finishing
-                        onClick={() => {
-                          setnextPage(1);
-                        }}
+              {isFormCompleted ? null : renderStepDetails()}
+              {renderFormContent()}
+            </div>
+            {isFormCompleted
+              ? <div />
+              : <div className={styles.bottom}>
+                  {nextPage === 0
+                    ? <div />
+                    : <Button
+                        bgColor="transparent"
+                        color="gray"
+                        name="Go back"
+                        onClick={handleGoBack}
                       />}
-            </div>
-            <div className={styles.bottom}>
-              {nextPage === 0
-                ? <div />
-                : <Button
-                    bgColor="transparent"
-                    color="gray"
-                    name="Go back"
-                    onClick={() => {
-                      setnextPage(nextPage - 1);
-                    }}
-                  />}
 
-              {nextPage === 3
-                ? <Button
-                    bgColor="rgba(72, 62, 255, 1)"
-                    color="white"
-                    name="Confirm"
-                    onClick={() => {}}
-                  />
-                : <Button
-                    bgColor=""
-                    color="white"
-                    name="Next Page"
-                    onClick={() => {
-                      setnextPage(nextPage + 1);
-                    }}
-                  />}
-            </div>
+                  {nextPage === 3
+                    ? <Button
+                        bgColor="rgba(72, 62, 255, 1)"
+                        color="white"
+                        name="Confirm"
+                        onClick={() => {
+                          reDirectToHomePage();
+                          setFormCompleted(true);
+                        }}
+                      />
+                    : <Button
+                        bgColor=""
+                        color="white"
+                        name="Next Page"
+                        onClick={handleNextPage}
+                      />}
+                </div>}
           </aside>
         </div>
       </main>
     </div>
   );
-}
+};
 
 export default FormPage;

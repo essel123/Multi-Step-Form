@@ -6,15 +6,22 @@ type Props = {
   name: string;
   type: string;
   value: string;
+  required :string
   placeholder: string;
-  onChange: () => void;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  borderstyle: string;
 };
 export class InputField extends React.Component<Props> {
   render() {
     return (
       <div>
         <label className={styles.label} htmlFor={this.props.name}>
-          {this.props.name}
+          <div className={styles.errorlabel}>
+            <span> {this.props.name}</span>{" "}
+            <span className={styles.error} id="error">
+              {this.props.required}
+            </span>
+          </div>
           <input
             onChange={this.props.onChange}
             className={styles.input}
@@ -23,7 +30,8 @@ export class InputField extends React.Component<Props> {
             id={this.props.name}
             value={this.props.value}
             placeholder={` e.g. ${this.props.placeholder}`}
-            required
+            style={{ border: `${this.props.borderstyle}` }}
+           
           />
         </label>
       </div>

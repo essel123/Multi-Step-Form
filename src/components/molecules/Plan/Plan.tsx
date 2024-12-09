@@ -33,7 +33,7 @@ export class Plan extends React.Component<Props> {
             <h3 className={styles.planprice}>
               +${this.props.planprice}
             </h3>
-            <p>
+            <p className={styles.benefit}>
               {this.props.isBenefit && this.props.benefit}
             </p>
           </div>

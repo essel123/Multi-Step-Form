@@ -16,3 +16,33 @@
   height: 1px;
   background: rgba(150, 153, 170, 1);
 }
+
+.total {
+  padding: 24px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.total h2 {
+  color: rgba(150, 153, 170, 1);
+  font-family: 'ubuntu-regular';
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+
+}
+
+.total h3 {
+  font-family: 'ubuntu-regular';
+  color: rgba(72, 62, 255, 1);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 20px;
+  text-align: right;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+
+}

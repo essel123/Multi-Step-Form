@@ -60,7 +60,29 @@ const StepDetails = () => {
   return Data;
 };
 
+const registeredData = () =>{
 
+
+  const userData =  {
+    name: localStorage.getItem('name'),
+    addres: localStorage.getItem('address'),
+    number:localStorage.getItem('number'),
+    plan: {
+      title:localStorage.getItem('planoption'),
+      value:localStorage.getItem('planvalue')
+    },
+    selectedAddons:JSON.parse( `${localStorage.getItem('selectedAddons')}`)
+
+  }
+
+
+   const data = JSON.stringify(userData)
+ localStorage.setItem('userData',data)
+}
+
+const name = localStorage.getItem('name');
+const addres = localStorage.getItem('address');
+const number =  localStorage.getItem('number');
 
 const PlanOption = () =>{
     const Data =  [
@@ -95,6 +117,59 @@ const PlanOption = () =>{
 }
 
 
+const Fields = () => {
+
+  return [
+    {
+      "name": "Name",
+      "type": "text",
+      "placeholder": "essel apusiga",
+      "value": name
+    },
+    {
+      "name": "Email Address",
+      "type": "email",
+      "placeholder": "essel.abraham@amalitech.com",
+      "value": addres
+    },
+    {
+      "name": "Phone Number",
+      "type": "text",
+      "placeholder": "+233532911103",
+      "value": number
+    }
+  ];
+  
+}
+
+
+const addonData = () =>{
+  
+
+  return [
+    {
+      "name": "Online service",
+      "description": "Access to multiplayer games",
+      "moAddon": "1/mo",
+      "yrAddon": "10/yr"
+    },
+    {
+      "name": "Larger storage",
+      "description": "Extra 1TB of cloud save",
+      "moAddon": "2/mo",
+      "yrAddon": "20/yr"
+    },
+    {
+      "name": "Customizable Profile",
+      "description": "Custom theme on your profile",
+      "moAddon": "2/mo",
+      "yrAddon": "20/yr"
+    }
+  ]
+  
+}
+
+
 
 // eslint-disable-next-line react-refresh/only-export-components
-export { Steps, StepDetails, usePersistedState,PlanOption};
+export { Steps, StepDetails, usePersistedState,PlanOption,Fields,registeredData,addonData};

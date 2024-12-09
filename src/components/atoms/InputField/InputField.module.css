@@ -8,6 +8,17 @@
     color: rgba(2, 41, 89, 1);
 }
 
+.errorlabel{
+    display: flex;
+    justify-content: space-between;
+}
+
+.error{
+    
+    font-weight: 700;
+    color: rgba(238, 55, 74, 1);
+}
+
 
 
 .input {

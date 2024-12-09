@@ -5,6 +5,9 @@ type Props = {
   name: string;
   description: string;
   plan: string;
+  onChange: (event:React.ChangeEvent<HTMLInputElement>) => void;
+  checked:boolean;
+
 };
 
 export class AddOn extends React.Component<Props> {
@@ -16,9 +19,8 @@ export class AddOn extends React.Component<Props> {
             <input
               className={styles.checkbox}
               type="checkbox"
-              onChange={event => {
-                console.log(event);
-              }}
+              onChange={this.props.onChange}
+              checked={this.props.checked}
             />
             <div>
               <h3 className={styles.name}>
