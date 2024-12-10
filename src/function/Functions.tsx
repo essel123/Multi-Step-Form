@@ -80,9 +80,6 @@ const registeredData = () =>{
  return (data);
 }
 
-const name = localStorage.getItem('name');
-const addres = localStorage.getItem('address');
-const number =  localStorage.getItem('number');
 
 const PlanOption = () =>{
     const Data =  [
@@ -116,6 +113,9 @@ const PlanOption = () =>{
       return Data;
 }
 
+const name = localStorage.getItem('name');
+const addres = localStorage.getItem('address');
+const number =  localStorage.getItem('number');
 
 const Fields = () => {
 
