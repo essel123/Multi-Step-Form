@@ -87,47 +87,47 @@ describe("PlanOption function", () => {
   });
 });
 beforeEach(() => {
-    Storage.prototype.getItem = jest.fn().mockImplementation((key:number) => {
-      const mockData = {
-        name: 'essel apusiga',
-        address: 'essel.abraham@amalitech.com',
-        number: '+233532911103'
-      };
-      return mockData[key];
-    });
-  
-    Storage.prototype.setItem = jest.fn();  // Mock the setItem function
+  Storage.prototype.getItem = jest.fn().mockImplementation((key: number) => {
+    const mockData = {
+      name: "essel apusiga",
+      address: "essel.abraham@amalitech.com",
+      number: "+233532911103"
+    };
+    return mockData[key];
   });
-  
-  describe("Fields function", () => {
-    it("should return the correct JSON structure", () => {
-      const expected = [
-        {
-          name: "Name",
-          type: "text",
-          placeholder: "essel apusiga",
-          value: 'essel apusiga'
-        },
-        {
-          name: "Email Address",
-          type: "email",
-          placeholder: "essel.abraham@amalitech.com",
-          value: 'essel.abraham@amalitech.com'
-        },
-        {
-          name: "Phone Number",
-          type: "text",
-          placeholder: "+233532911103",
-          value: '+233532911103'
-        }
-      ];
-  
-      const result = Fields();
-  
-      // Check if the result matches the expected data
-      expect(result).toEqual(expected);
-    });
+
+  Storage.prototype.setItem = jest.fn(); // Mock the setItem function
+});
+
+describe("Fields function", () => {
+  it("should return the correct JSON structure", () => {
+    const expected = [
+      {
+        name: "Name",
+        type: "text",
+        placeholder: "essel apusiga",
+        value: "essel apusiga"
+      },
+      {
+        name: "Email Address",
+        type: "email",
+        placeholder: "essel.abraham@amalitech.com",
+        value: "essel.abraham@amalitech.com"
+      },
+      {
+        name: "Phone Number",
+        type: "text",
+        placeholder: "+233532911103",
+        value: "+233532911103"
+      }
+    ];
+
+    const result = Fields();
+
+    // Check if the result matches the expected data
+    expect(result).toEqual(expected);
   });
+});
 describe("addonData function", () => {
   it("should return the correct JSON structure", () => {
     const expected = [
