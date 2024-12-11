@@ -184,9 +184,6 @@ const reDirectToHomePage = () => {
     remove("borderColor");
     remove("planoption");
     remove("planvalue");
-    remove("checked");
-    remove("checked1");
-    remove("checked2");
     remove("checkedStates");
     remove('selectedAddons')
     remove("selectedPlan");
@@ -195,5 +192,21 @@ const reDirectToHomePage = () => {
   }, 2000);
 }
 
+
+const resetForm =() =>{
+    window.location.reload();
+     remove("plan");
+    remove("name");
+    remove("address");
+    remove("number");
+    remove("borderColor");
+    remove("planoption");
+    remove("planvalue");
+    remove("checkedStates");
+    remove('selectedAddons')
+    remove("selectedPlan");
+    localStorage.setItem("nextPage", "0");
+}
+
 // eslint-disable-next-line react-refresh/only-export-components
-export { Steps, StepDetails, usePersistedState,PlanOption,Fields,registeredData,addonData,reDirectToHomePage};
+export { Steps, StepDetails, usePersistedState,PlanOption,Fields,registeredData,addonData,reDirectToHomePage,resetForm};

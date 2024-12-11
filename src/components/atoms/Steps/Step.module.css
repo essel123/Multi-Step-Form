@@ -61,6 +61,10 @@
   .formdetails {
     display: none;
   }
+
+  .section{
+    pointer-events: none;
+  }
 }
 
 @font-face {

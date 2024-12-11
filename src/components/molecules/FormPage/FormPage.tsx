@@ -5,7 +5,8 @@ import {
   StepDetails,
   usePersistedState,
   Fields,
-  reDirectToHomePage
+  reDirectToHomePage,
+  resetForm
 } from "../../../function/Functions";
 import { Step } from "../../atoms/Steps/Step";
 import { StepTitle } from "../../atoms/StepTitle/StepTitle";
@@ -51,16 +52,16 @@ const FormPage: React.FC = () => {
       if (name.trim() === "" || address.trim() === "" || number.trim() === "") {
         checkEmptyFields();
       } else {
-        setNextPage(nextPage + 1); // Proceed to next page if validation passes
+        setNextPage(nextPage + 1);
       }
     } else {
-      setNextPage(nextPage + 1); // Move to the next page
+      setNextPage(nextPage + 1);
     }
   };
 
   const handleGoBack = () => {
     setNextPage(nextPage - 1);
-    setFormCompleted(false); // Reset completion status on going back
+    setFormCompleted(false);
   };
 
   const renderFormContent = () => {
@@ -133,6 +134,10 @@ const FormPage: React.FC = () => {
     });
   };
 
+  function handleReset(): void {
+    resetForm();
+  }
+
   return (
     <div>
       <main className={styles.main}>
@@ -181,6 +186,14 @@ const FormPage: React.FC = () => {
                 </li>
               )}
             </ul>
+            <div className={styles.repositionResetBtn}>
+              <Button
+                name="Reset"
+                color="yellow"
+                bgColor="transparent"
+                onClick={() => handleReset()}
+              />
+            </div>
           </aside>
 
           <aside className={styles.rightaside}>
@@ -219,6 +232,35 @@ const FormPage: React.FC = () => {
                 </div>}
           </aside>
         </div>
+        {isFormCompleted
+          ? <div />
+          : <footer className={styles.footer}>
+              {nextPage === 0
+                ? <div />
+                : <Button
+                    bgColor="transparent"
+                    color="gray"
+                    name="Go back"
+                    onClick={handleGoBack}
+                  />}
+
+              {nextPage === 3
+                ? <Button
+                    bgColor="rgba(72, 62, 255, 1)"
+                    color="white"
+                    name="Confirm"
+                    onClick={() => {
+                      reDirectToHomePage();
+                      setFormCompleted(true);
+                    }}
+                  />
+                : <Button
+                    bgColor=""
+                    color="white"
+                    name="Next Page"
+                    onClick={handleNextPage}
+                  />}
+            </footer>}
       </main>
     </div>
   );
