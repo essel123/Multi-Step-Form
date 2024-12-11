@@ -14,9 +14,7 @@ describe("Steps function", () => {
       { id: 3, title: "ADD-ONS" },
       { id: 4, title: "SUMMARY" }
     ];
-
     const result = Steps();
-
     // Check if the result matches the expected data
     expect(result).toEqual(expected);
   });

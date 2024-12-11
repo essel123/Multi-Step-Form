@@ -1,9 +1,18 @@
+.formpage{
+  display: flex;
+  flex-direction: column;
+}
+
 @media (min-width: 769px) {
+  .footer{
+    display: none;
+  }
   .main {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+   
   }
 }
 
@@ -28,7 +37,6 @@
   padding: 10px;
   border-radius: 15px !important;
   box-shadow: 0px 25px 40px -20px rgba(0, 0, 0, 0.1);
-  border-radius: 0px !important;
   overflow: hidden;
 }
 
@@ -63,6 +71,7 @@
   border-radius: 20px !important;
 }
 
+
 @media (max-width: 450px) {
   .main {
     display: flex;
@@ -94,9 +103,8 @@
 
   .rightaside {
     display: flex;
-    top: -80px;
+    top: -100px;
   }
-
   .center {
     background: transparent;
     display: flex;
@@ -112,8 +120,25 @@
   }
 
   .bottom {
-    background: #ffffff;
-    padding: 5px;
-    bottom: -5px;
+   display: none;
+
   }
+
+
+  .footer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    top: 90%;
+    background: #ffffff;
+    height: 70px;
+    width: 100%;
+  }
+
+  .main{
+    display: flex;
+    flex-direction: column;
+  }
+ 
 }

@@ -62,10 +62,17 @@
 
 @media (max-width: 450px) {
   .input {
-    padding: 15px;
+    padding: 15px !important;
+    font-weight: lighter;
+
   }
 
   .input::placeholder {
     font-size: 12px;
+  }
+
+  .error{
+  font-size: 12px;
+
   }
 }

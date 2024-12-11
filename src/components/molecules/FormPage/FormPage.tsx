@@ -5,7 +5,9 @@ import {
   StepDetails,
   usePersistedState,
   Fields,
-  reDirectToHomePage
+  reDirectToHomePage,
+  CurrentPage,
+  ChangePage
 } from "../../../function/Functions";
 import { Step } from "../../atoms/Steps/Step";
 import { StepTitle } from "../../atoms/StepTitle/StepTitle";
@@ -17,9 +19,18 @@ import Finishing from "../Finishing/Finishing";
 import Success from "../../atoms/Success/Success";
 import { InputField } from "../../atoms/InputField/InputField";
 import { useState } from "react";
+import {
+  next,
+  prev,
+  gotopage,
+  setFormStarted
+} from "../../../reduxState/stateSlice";
 
 const FormPage: React.FC = () => {
-  const [nextPage, setNextPage] = usePersistedState("nextPage", 0);
+  const currentPage = CurrentPage();
+
+  const changePage = ChangePage();
+
   const [isFormCompleted, setFormCompleted] = usePersistedState(
     "isFormCompleted",
     false
@@ -46,26 +57,26 @@ const FormPage: React.FC = () => {
 
   // Handler for form submission (validation and progress)
   const handleNextPage = () => {
-    if (nextPage === 0) {
+    if (currentPage === 0) {
       checkEmptyFields();
       if (name.trim() === "" || address.trim() === "" || number.trim() === "") {
         checkEmptyFields();
       } else {
-        setNextPage(nextPage + 1); // Proceed to next page if validation passes
+        changePage(next());
       }
     } else {
-      setNextPage(nextPage + 1); // Move to the next page
+      changePage(next());
     }
   };
 
   const handleGoBack = () => {
-    setNextPage(nextPage - 1);
+    changePage(prev());
     setFormCompleted(false); // Reset completion status on going back
   };
 
   const renderFormContent = () => {
     const fields = Fields();
-    switch (nextPage) {
+    switch (currentPage) {
       case 0:
         return (
           <form className="slide-in">
@@ -111,7 +122,7 @@ const FormPage: React.FC = () => {
       case 3:
         return isFormCompleted
           ? <Success />
-          : <Finishing onClick={() => setNextPage(1)} />;
+          : <Finishing onClick={() => changePage(gotopage(1))} />;
       default:
         return null;
     }
@@ -120,7 +131,7 @@ const FormPage: React.FC = () => {
   const renderStepDetails = () => {
     const steps = StepDetails();
     return steps.map((dt, index) => {
-      if (index === nextPage) {
+      if (index === currentPage) {
         return (
           <StepTitle
             key={index}
@@ -134,93 +145,121 @@ const FormPage: React.FC = () => {
   };
 
   return (
-    <div>
-      <main className={styles.main}>
-        <div className={styles.center}>
-          <aside className={styles.leftaside}>
-            <ul>
-              {Steps().map((dt, id) =>
-                <li className={styles.li} key={id}>
-                  <Step
-                    handleClick={() => {
-                      if (nextPage === 0) {
+    <main className={styles.main}>
+      <div className={styles.center}>
+        <aside className={styles.leftaside}>
+          <ul>
+            {Steps().map((dt, id) =>
+              <li className={styles.li} key={id}>
+                <Step
+                  handleClick={() => {
+                    if (currentPage === 0) {
+                      checkEmptyFields();
+                      if (
+                        name.trim() === "" ||
+                        address.trim() === "" ||
+                        number.trim() === ""
+                      ) {
                         checkEmptyFields();
-                        if (
-                          name.trim() === "" ||
-                          address.trim() === "" ||
-                          number.trim() === ""
-                        ) {
-                          checkEmptyFields();
-                        } else {
-                          setNextPage(id); // Proceed to next page if validation passes
-                        }
                       } else {
-                        setNextPage(id); // Move to the next page
+                        changePage(gotopage(id)); // Proceed to next page if validation passes
                       }
-                    }}
-                    id_bg_color={
-                      isFormCompleted
-                        ? "transparent"
-                        : id === nextPage
-                          ? "rgba(190, 226, 253, 1)"
-                          : "transparent"
+                    } else {
+                      changePage(gotopage(id)); // Move to the next page
                     }
-                    id_color={
-                      isFormCompleted
-                        ? "white"
-                        : id === nextPage ? "rgba(2, 41, 89, 1)" : "white"
-                    }
-                    border_color={
-                      isFormCompleted
-                        ? "white"
-                        : id === nextPage ? "transparent" : "white"
-                    }
-                    formtitle={dt.title}
-                    id={dt.id}
-                  />
-                </li>
-              )}
-            </ul>
-          </aside>
+                  }}
+                  id_bg_color={
+                    isFormCompleted
+                      ? "transparent"
+                      : id === currentPage
+                        ? "rgba(190, 226, 253, 1)"
+                        : "transparent"
+                  }
+                  id_color={
+                    isFormCompleted
+                      ? "white"
+                      : id === currentPage ? "rgba(2, 41, 89, 1)" : "white"
+                  }
+                  border_color={
+                    isFormCompleted
+                      ? "white"
+                      : id === currentPage ? "transparent" : "white"
+                  }
+                  formtitle={dt.title}
+                  id={dt.id}
+                />
+              </li>
+            )}
+          </ul>
+        </aside>
 
-          <aside className={styles.rightaside}>
-            <div className={styles.mobileview}>
-              {isFormCompleted ? null : renderStepDetails()}
-              {renderFormContent()}
-            </div>
-            {isFormCompleted
-              ? <div />
-              : <div className={styles.bottom}>
-                  {nextPage === 0
-                    ? <div />
-                    : <Button
-                        bgColor="transparent"
-                        color="gray"
-                        name="Go back"
-                        onClick={handleGoBack}
-                      />}
+        <aside className={styles.rightaside}>
+          <div className={styles.mobileview}>
+            {isFormCompleted ? null : renderStepDetails()}
+            {renderFormContent()}
+          </div>
+          {isFormCompleted
+            ? <div />
+            : <div className={styles.bottom}>
+                {currentPage === 0
+                  ? <div />
+                  : <Button
+                      bgColor="transparent"
+                      color="gray"
+                      name="Go back"
+                      onClick={handleGoBack}
+                    />}
 
-                  {nextPage === 3
-                    ? <Button
-                        bgColor="rgba(72, 62, 255, 1)"
-                        color="white"
-                        name="Confirm"
-                        onClick={() => {
-                          reDirectToHomePage();
-                          setFormCompleted(true);
-                        }}
-                      />
-                    : <Button
-                        bgColor=""
-                        color="white"
-                        name="Next Page"
-                        onClick={handleNextPage}
-                      />}
-                </div>}
-          </aside>
-        </div>
-      </main>
-    </div>
+                {currentPage === 3
+                  ? <Button
+                      bgColor="rgba(72, 62, 255, 1)"
+                      color="white"
+                      name="Confirm"
+                      onClick={() => {
+                        reDirectToHomePage();
+                        setFormCompleted(true);
+                        setTimeout(() => changePage(setFormStarted(false)), 2000);
+                      }}
+                    />
+                  : <Button
+                      bgColor=""
+                      color="white"
+                      name="Next Page"
+                      onClick={handleNextPage}
+                    />}
+              </div>}
+        </aside>
+      </div>
+
+      <footer className={styles.footer}>
+        {currentPage === 0
+          ? <div />
+          : <Button
+              bgColor="transparent"
+              color="gray"
+              name="Go back"
+              onClick={handleGoBack}
+            />}
+
+        {currentPage === 3
+          ? <Button
+              bgColor="rgba(72, 62, 255, 1)"
+              color="white"
+              name="Confirm"
+              onClick={() => {
+                reDirectToHomePage();
+                setFormCompleted(true);
+                setTimeout(() => changePage(setFormStarted(false)), 2000);
+              }}
+            />
+          : <Button
+              bgColor=""
+              color="white"
+              name="Next Page"
+              onClick={handleNextPage}
+            />}
+      </footer>
+    </main>
   );
 };
 

@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+ import { useAppDispatch,useAppSelector } from "../reduxState/types";
+import { setFormStarted } from "../reduxState/stateSlice";
 
   const usePersistedState = (key:string,value:unknown) => {
     const [state, setState] = useState(() => {
@@ -169,10 +171,38 @@ const addonData = () =>{
   
 }
 
-function remove(item: string) {
+
+
+const CurrentPage = () =>{
+
+  const currentPage = useAppSelector(
+    (state) => state.pagestate.pageIndex
+  );
+  
+  return currentPage;
+ 
+}
+
+
+const ChangePage = () =>{
+  const changePage = useAppDispatch();
+
+  return changePage;
+}
+
+const FormStarted = () =>{
+  const formStarted = useAppSelector((state)=>state.pagestate.isFormStarted)
+
+  return formStarted;
+}
+
+
+
+const  remove = (item: string) => {
   localStorage.removeItem(item);
 }
 const reDirectToHomePage = () => {
+  
   setTimeout(() => {
     registeredData();
     localStorage.setItem("isFormStarted", "false");
@@ -192,8 +222,11 @@ const reDirectToHomePage = () => {
     remove("selectedPlan");
     localStorage.setItem("nextPage", "0");
     localStorage.setItem("isFormCompleted", "false");
+   
   }, 2000);
 }
 
+
+
 // eslint-disable-next-line react-refresh/only-export-components
-export { Steps, StepDetails, usePersistedState,PlanOption,Fields,registeredData,addonData,reDirectToHomePage};
+export { Steps, StepDetails, usePersistedState,PlanOption,Fields,registeredData,addonData,reDirectToHomePage,CurrentPage,ChangePage,FormStarted};
