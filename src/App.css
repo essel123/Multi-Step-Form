@@ -1,0 +1,30 @@
+.planoptions {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 50px;
+}
+
+@media (max-width: 450px) {
+  .planoptions {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+}
+
+@keyframes slideInRight {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.slide-in {
+  animation: slideInRight 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+}

@@ -1,0 +1,24 @@
+import styles from "./StepTitle.module.css";
+import "../../../App.css";
+import * as React from "react";
+type Props = {
+  title: string;
+  description: string;
+};
+
+export class StepTitle extends React.Component<Props> {
+  render() {
+    return (
+      <div className="slide-in">
+        <section className={styles.section}>
+          <h1 className={styles.title}>
+            {this.props.title}
+          </h1>
+          <p className={styles.description}>
+            {this.props.description}
+          </p>
+        </section>
+      </div>
+    );
+  }
+}

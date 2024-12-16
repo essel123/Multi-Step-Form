@@ -1,0 +1,73 @@
+.section {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.circle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 33px;
+  height: 33px;
+  border-radius: 50%;
+  background: rgba(190, 226, 253, 1);
+  border: 1px solid rgb(255, 255, 255);
+  transition: background 0.3s ease;
+}
+
+.id {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 16.09px;
+  letter-spacing: 1px;
+  text-align: center;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+}
+
+.stepid {
+  font-family: 'ubuntu-Regular';
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 13.79px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  color: rgba(171, 188, 255, 1);
+}
+
+.formtitle {
+  font-family: 'ubuntu-Regular';
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 16.09px;
+  letter-spacing: 1px;
+  text-align: left;
+  margin-top: 10px;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  color: rgba(255, 255, 255, 1);
+}
+
+.formdetails {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 450px) {
+  .formdetails {
+    display: none;
+  }
+
+  .section{
+    pointer-events: none;
+  }
+}
+
+@font-face {
+  font-family: 'ubuntu-Regular';
+  src: url(./fonts/Ubuntu-Regular.ttf);
+}

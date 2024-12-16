@@ -1,18 +1,26 @@
-*{
+* {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
   overflow: hidden;
 }
 
-
-
 @font-face {
   font-family: 'ubuntu-bold';
   src: url(../public/fonts/Ubuntu-Bold.ttf);
 }
 
+@font-face {
+  font-family: 'ubuntu-regular';
+  src: url(../public/fonts/Ubuntu-Regular.ttf);
+}
 
-body{
+@font-face {
+  font-family: 'ubuntu-medium';
+  src: url(../public/fonts/Ubuntu-Medium.ttf);
+}
+
+body {
   font-family: 'ubuntu-bold';
+  background: #f1f8f8;
 }

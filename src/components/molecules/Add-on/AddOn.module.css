@@ -1,0 +1,100 @@
+.section {
+  border: 1px solid rgba(214, 217, 230, 1);
+  padding: 20px 20px;
+  border-radius: 10px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: 0.3s ease-in;
+  margin: 12px 0;
+}
+
+.name {
+  font-family: 'ubuntu-Medium';
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 18.38px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  color: rgba(2, 41, 89, 1);
+}
+
+.description {
+  font-family: 'ubuntu-Regular';
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 20px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  color: rgba(150, 153, 170, 1);
+}
+
+.plan {
+  color: rgba(72, 62, 255, 1);
+  font-family: 'ubuntu-Regular';
+}
+
+.checkbox {
+  border: 1px solid grey;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  -webkit-appearance: none;
+}
+
+.checkbox:checked {
+  background: rgba(72, 62, 255, 1);
+}
+
+.checkbox::before {
+  content: url("../../../../public/images/icon-checkmark.svg");
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.section:hover {
+  border: 1px solid rgba(72, 62, 255, 1);
+}
+
+.section input[type="checkbox"]:checked {
+  border-color: green;
+}
+
+.leftside {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+@media (max-width: 450px) {
+  .section {
+    padding: 15px 15px;
+  }
+
+  .name {
+    font-size: 14px;
+  }
+
+  .description {
+    font-size: 12px;
+  }
+
+  .plan {
+    font-size: 12px;
+  }
+}
+
+@font-face {
+  font-family: 'ubuntu-Regular';
+  src: url('../../../../public/fonts/Ubuntu-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'ubuntu-Medium';
+  src: url('../../../../public/fonts/Ubuntu-Medium.ttf');
+}
