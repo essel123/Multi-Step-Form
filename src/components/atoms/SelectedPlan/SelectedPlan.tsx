@@ -5,8 +5,7 @@ import * as React from "react";
 type Props = {
   name: string;
   term: string;
-  rate: number;
-  term_: string;
+  rate: string;
   onClick: () => void;
 };
 
@@ -24,7 +23,7 @@ export class SelectedPlan extends React.Component<Props> {
         </div>
         <div className={styles.rightside}>
           <h3>
-            ${this.props.rate}/{this.props.term_}
+            {this.props.rate}
           </h3>
         </div>
       </div>

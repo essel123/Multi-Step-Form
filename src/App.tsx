@@ -1,31 +1,59 @@
 import Subscribe from "./components/atoms/HomePage/Subscribe";
 import FormPage from "./components/molecules/FormPage/FormPage";
-import { gotopage,setFormStarted } from "./reduxState/stateSlice";
-import { ChangePage,FormStarted } from "./function/Functions";
+import {
+  gotopage,
+  setFormStarted,
+  setFormCompleted,
+  setEmail,
+  setName,
+  setNumber,
+  setSelectedPlan,
+  setTotalPrice,
+  setSelectedAddons,
+  setCheckedStates,
+  setPlanOption,
+  setPlanValue,
+  setYearly,
+  resetSelectedAddons
+} from "./reduxState/stateSlice";
+import { PageController, FormStarted } from "./function/Functions";
 import "./App.css";
 function App() {
-  // const [isFormStarted, setFormStarted] = usePersistedState(
-  //   "isFormStarted",
-  //   false
-  // );
+  const StateController = PageController();
 
-  const setformPage = ChangePage();
- 
-  const isFormStarted =  FormStarted();
+  const isFormStarted = FormStarted();
+
   const handleClick = () => {
-    setformPage(( setFormStarted(true)))
-    setformPage(gotopage(0));
+    StateController(setFormStarted(true));
+    StateController(setFormCompleted(false));
+    StateController(gotopage(0));
+  };
+
+  const handleFormReset = () => {
+    StateController(setEmail(""));
+    StateController(setName(""));
+    StateController(setNumber(""));
+    StateController(gotopage(0));
+    StateController(setSelectedPlan(-1));
+    StateController(setTotalPrice(0));
+    StateController(setSelectedAddons([]));
+    StateController(setCheckedStates([false, false, false]));
+    StateController(setPlanOption(""));
+    StateController(setPlanValue(""));
+    StateController(setYearly(false));
+    StateController(resetSelectedAddons());
   };
   return (
-    <>
+    <div>
       {isFormStarted
         ? <FormPage />
         : <Subscribe
             handleClick={() => {
               handleClick();
+              handleFormReset();
             }}
           />}
-    </>
+    </div>
   );
 }
 

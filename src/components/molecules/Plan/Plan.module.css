@@ -1,3 +1,5 @@
+
+
 .section {
   margin-top: 40px;
   padding: 15px 10px;
@@ -61,6 +63,11 @@
 }
 
 @media (max-width: 450px) {
+
+  *{
+    padding: 0px;
+    margin: 0px;
+  }
   .section {
     margin-top: 12px;
     padding: auto;
@@ -70,6 +77,7 @@
     gap: 10px;
     max-width: 375px !important;
     width: 100%;
+    padding: 5px;
   }
 
   .textsection {

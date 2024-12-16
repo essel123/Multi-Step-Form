@@ -15,7 +15,7 @@ const persistConfig = {
 
 
 const reducer = combineReducers({
-  pagestate: stateReducer
+  pageState: stateReducer
 });
 
 const persistedReducer = persistReducer(persistConfig, reducer);

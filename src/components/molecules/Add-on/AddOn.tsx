@@ -1,7 +1,7 @@
 import styles from "./AddOn.module.css";
 // @flow
 import * as React from "react";
-type Props = {
+type AdonProps = {
   name: string;
   description: string;
   plan: string;
@@ -9,7 +9,7 @@ type Props = {
   checked: boolean;
 };
 
-export class AddOn extends React.Component<Props> {
+export class AddOn extends React.Component<AdonProps> {
   render() {
     return (
       <div>

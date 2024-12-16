@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
  import { useAppDispatch,useAppSelector } from "../reduxState/types";
-import { setFormStarted } from "../reduxState/stateSlice";
-
   const usePersistedState = (key:string,value:unknown) => {
     const [state, setState] = useState(() => {
       const storedValue = localStorage.getItem(key);
@@ -174,27 +172,42 @@ const addonData = () =>{
 
 
 const CurrentPage = () =>{
-
   const currentPage = useAppSelector(
-    (state) => state.pagestate.pageIndex
+    (state) => state.pageState.pageIndex
   );
-  
   return currentPage;
  
 }
 
 
-const ChangePage = () =>{
-  const changePage = useAppDispatch();
-
-  return changePage;
+const PageController = () =>{
+  const controler = useAppDispatch();
+  return controler;
 }
 
 const FormStarted = () =>{
-  const formStarted = useAppSelector((state)=>state.pagestate.isFormStarted)
-
+  const formStarted = useAppSelector((state)=>state.pageState.isFormStarted)
   return formStarted;
 }
+
+const CheckFormCompletion = () =>{
+  const isFormCompleted = useAppSelector(state=>state.pageState.isFormCompleted);
+  return isFormCompleted;
+}
+
+const Name =  () =>{
+  return useAppSelector(state=>state.pageState.formData.name)
+}
+
+const Email =  () =>{
+  return useAppSelector(state=>state.pageState.formData.email)
+}
+const Phone =  () =>{
+  return useAppSelector(state=>state.pageState.formData.phone)
+}
+
+
+
 
 
 
@@ -229,4 +242,20 @@ const reDirectToHomePage = () => {
 
 
 // eslint-disable-next-line react-refresh/only-export-components
-export { Steps, StepDetails, usePersistedState,PlanOption,Fields,registeredData,addonData,reDirectToHomePage,CurrentPage,ChangePage,FormStarted};
+export { 
+  Steps,
+   StepDetails, 
+   usePersistedState,
+   PlanOption,
+   Fields,
+   registeredData,
+   addonData,
+   reDirectToHomePage,
+   CurrentPage,
+   PageController,
+   FormStarted,
+   CheckFormCompletion,
+   Name,
+   Email,
+   Phone,
+  };

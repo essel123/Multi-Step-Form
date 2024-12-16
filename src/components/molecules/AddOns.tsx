@@ -1,36 +1,32 @@
 import { AddOn } from "./Add-on/AddOn";
-import { addonData, usePersistedState } from "../../function/Functions";
+import { addonData, PageController } from "../../function/Functions";
 import "../../App.css";
+import { useAppSelector } from "../../reduxState/types";
+import {
+  setCheckedStates,
+  setSelectedAddons
+} from "../../reduxState/stateSlice";
 
 function AddOns() {
-  const plantype = localStorage.getItem("plan") === "true";
-  const [checkedStates, setCheckedStates] = usePersistedState("checkedStates", [
-    false,
-    false,
-    false
-  ]);
-  const handleCheckboxChange = (index: number, addon: any) => {
+  const yearly = useAppSelector(state => state.pageState.yearly);
+  const controller = PageController();
+  const checkedStates = useAppSelector(state => state.pageState.checkedStates);
+
+  const handleCheckboxChange = (
+    index: number,
+    addon: string | number | [] | {} | any
+  ) => {
     const newCheckedStates = [...checkedStates];
     newCheckedStates[index] = !newCheckedStates[index];
-    setCheckedStates(newCheckedStates);
+    controller(setCheckedStates(newCheckedStates));
     const selectedAddon = {
       name: addon.name,
-      plan: plantype ? addon.yrAddon : addon.moAddon
+      plan: yearly ? addon.yrAddon : addon.moAddon
     };
 
-    let selectedAddons = JSON.parse(
-      localStorage.getItem("selectedAddons") || "[]"
-    );
-
     if (newCheckedStates[index]) {
-      selectedAddons.push(selectedAddon);
-    } else {
-      selectedAddons = selectedAddons.filter(
-        (item: any) => item.name !== addon.name
-      );
+      controller(setSelectedAddons(selectedAddon));
     }
-
-    localStorage.setItem("selectedAddons", JSON.stringify(selectedAddons));
   };
 
   return (
@@ -41,7 +37,7 @@ function AddOns() {
             key={addon.name}
             name={addon.name}
             description={addon.description}
-            plan={plantype ? addon.yrAddon : addon.moAddon}
+            plan={yearly ? addon.yrAddon : addon.moAddon}
             checked={checkedStates[index]}
             onChange={() => handleCheckboxChange(index, addon)}
           />

@@ -1,21 +1,38 @@
-import { PlanOption, usePersistedState } from "../../function/Functions";
+import { PlanOption, PageController } from "../../function/Functions";
 import { Plan } from "./Plan/Plan";
+
+import {
+  setPlanOption,
+  setPlanValue,
+  setSelectedPlan,
+  setYearly
+} from "../../reduxState/stateSlice";
 
 import "../../App.css";
 import { Toggler } from "../atoms/Toggler/Toggler";
+import { useAppSelector } from "../../reduxState/types";
+import { useState } from "react";
 
 function PlanOptions() {
-  // eslint-disable-next-line prefer-const
-  let [selectedPlan, setSelectedPlan] = usePersistedState("selectedPlan", -1);
+  const controler = PageController();
 
-  const [plan, setplan] = usePersistedState("plan", false);
+  let selectedPlan = useAppSelector(state => state.pageState.selectedPlan);
+
+  const yearly = useAppSelector(state => state.pageState.yearly);
 
   const Options = PlanOption();
 
-  const [borderColor, setborderColor] = usePersistedState(
-    "borderColor",
-    "rgba(214, 217, 230, 1)"
-  );
+  const [borderColor] = useState("blue");
+
+  const handlePlan = (index: number) => {
+    controler(setSelectedPlan(index));
+    controler(setPlanOption(Options[index].title));
+    controler(
+      setPlanValue(
+        yearly ? `$${Options[index].yearplan}` : `$${Options[index].monthplan}`
+      )
+    );
+  };
 
   return (
     <div className="slide-in">
@@ -24,25 +41,15 @@ function PlanOptions() {
           return (
             <Plan
               handleClick={() => {
-                selectedPlan = index;
-                setSelectedPlan(selectedPlan);
-
-                if (index === selectedPlan) {
-                  setborderColor("rgba(72, 62, 255, 1)");
-                  localStorage.setItem("planoption", dt.title);
-                  localStorage.setItem(
-                    "planvalue",
-                    plan ? dt.yearplan : dt.monthplan
-                  );
-                }
+                handlePlan(index);
               }}
-              isBenefit={plan}
+              isBenefit={yearly}
               benefit={dt.benefit}
               borderColor={`${index === selectedPlan
                 ? borderColor
                 : "rgba(214, 217, 230, 1)"}`}
               icon={dt.icon}
-              planprice={plan ? dt.yearplan : dt.monthplan}
+              planprice={yearly ? dt.yearplan : dt.monthplan}
               title={dt.title}
               key={index}
             />
@@ -51,12 +58,19 @@ function PlanOptions() {
       </div>
 
       <Toggler
-        checked={plan}
-        key={plan}
-        monthcolor={plan ? " rgba(2, 41, 89, 1)" : "rgba(150, 153, 170, 1)"}
-        yearcolor={plan ? " rgba(150, 153, 170, 1)" : "rgba(2, 41, 89, 1)"}
+        checked={yearly}
+        monthcolor={yearly ? " rgba(2, 41, 89, 1)" : "rgba(150, 153, 170, 1)"}
+        yearcolor={yearly ? " rgba(150, 153, 170, 1)" : "rgba(2, 41, 89, 1)"}
         handleclick={() => {
-          setplan(!plan);
+          controler(setYearly(!yearly));
+
+          controler(
+            setPlanValue(
+              yearly
+                ? Options[selectedPlan].monthplan
+                : Options[selectedPlan].yearplan
+            )
+          );
         }}
       />
     </div>

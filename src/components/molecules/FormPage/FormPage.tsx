@@ -1,45 +1,56 @@
+import { useState } from "react";
 import styles from "./FormPage.module.css";
+
+import { Step } from "../../atoms/Steps/Step";
+import { StepTitle } from "../../atoms/StepTitle/StepTitle";
+import { Button } from "../../atoms/Button/Button";
+import { InputField } from "../../atoms/InputField/InputField";
+import Success from "../../atoms/Success/Success";
+
+import PlanOptions from "../PlanOptions";
+import AddOns from "../AddOns";
+import Finishing from "../Finishing/Finishing";
 
 import {
   Steps,
   StepDetails,
-  usePersistedState,
   Fields,
-  reDirectToHomePage,
   CurrentPage,
-  ChangePage
+  PageController,
+  CheckFormCompletion,
+  Name,
+  Email,
+  Phone
 } from "../../../function/Functions";
-import { Step } from "../../atoms/Steps/Step";
-import { StepTitle } from "../../atoms/StepTitle/StepTitle";
-
-import PlanOptions from "../PlanOptions";
-import AddOns from "../AddOns";
-import { Button } from "../../atoms/Button/Button";
-import Finishing from "../Finishing/Finishing";
-import Success from "../../atoms/Success/Success";
-import { InputField } from "../../atoms/InputField/InputField";
-import { useState } from "react";
 import {
+  gotopage,
   next,
   prev,
-  gotopage,
-  setFormStarted
+  resetSelectedAddons,
+  setCheckedStates,
+  setEmail,
+  setFormCompleted,
+  setFormStarted,
+  setName,
+  setNumber,
+  setPlanOption,
+  setPlanValue,
+  setSelectedAddons,
+  setSelectedPlan,
+  setTotalPrice,
+  setYearly
 } from "../../../reduxState/stateSlice";
-
 const FormPage: React.FC = () => {
   const currentPage = CurrentPage();
 
-  const changePage = ChangePage();
+  const StateController = PageController();
 
-  const [isFormCompleted, setFormCompleted] = usePersistedState(
-    "isFormCompleted",
-    false
-  );
+  const isFormCompleted = CheckFormCompletion();
 
   // Form field states
-  const [name, setName] = usePersistedState("name", "");
-  const [address, setAddress] = usePersistedState("address", "");
-  const [number, setNumber] = usePersistedState("number", "");
+  const name = Name();
+  const address = Email();
+  const number = Phone();
   const [emptyFields, setEmptyFields] = useState({
     name: false,
     address: false,
@@ -54,6 +65,20 @@ const FormPage: React.FC = () => {
       number: number.trim() === ""
     });
   };
+  const handleFormReset = () => {
+    StateController(setEmail(""));
+    StateController(setName(""));
+    StateController(setNumber(""));
+    StateController(gotopage(0));
+    StateController(setSelectedPlan(-1));
+    StateController(setTotalPrice(0));
+    StateController(setSelectedAddons([]));
+    StateController(setCheckedStates([false, false, false]));
+    StateController(setPlanOption(""));
+    StateController(setPlanValue(""));
+    StateController(setYearly(false));
+    StateController(resetSelectedAddons());
+  };
 
   // Handler for form submission (validation and progress)
   const handleNextPage = () => {
@@ -62,16 +87,15 @@ const FormPage: React.FC = () => {
       if (name.trim() === "" || address.trim() === "" || number.trim() === "") {
         checkEmptyFields();
       } else {
-        changePage(next());
+        StateController(next());
       }
     } else {
-      changePage(next());
+      StateController(next());
     }
   };
 
   const handleGoBack = () => {
-    changePage(prev());
-    setFormCompleted(false); // Reset completion status on going back
+    StateController(prev());
   };
 
   const renderFormContent = () => {
@@ -89,11 +113,11 @@ const FormPage: React.FC = () => {
                 value={index === 0 ? name : index === 1 ? address : number}
                 onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                   if (index === 0) {
-                    setName(event.target.value);
+                    StateController(setName(event.target.value));
                   } else if (index === 1) {
-                    setAddress(event.target.value);
+                    StateController(setEmail(event.target.value));
                   } else {
-                    setNumber(event.target.value);
+                    StateController(setNumber(event.target.value));
                   }
                   checkEmptyFields();
                 }}
@@ -122,7 +146,7 @@ const FormPage: React.FC = () => {
       case 3:
         return isFormCompleted
           ? <Success />
-          : <Finishing onClick={() => changePage(gotopage(1))} />;
+          : <Finishing onClick={() => StateController(gotopage(1))} />;
       default:
         return null;
     }
@@ -162,10 +186,10 @@ const FormPage: React.FC = () => {
                       ) {
                         checkEmptyFields();
                       } else {
-                        changePage(gotopage(id)); // Proceed to next page if validation passes
+                        StateController(gotopage(id)); // Proceed to next page if validation passes
                       }
                     } else {
-                      changePage(gotopage(id)); // Move to the next page
+                      StateController(gotopage(id)); // Move to the next page
                     }
                   }}
                   id_bg_color={
@@ -191,6 +215,16 @@ const FormPage: React.FC = () => {
               </li>
             )}
           </ul>
+
+          {currentPage === 3 &&
+            <div className={styles.repositionResetBtn}>
+              <Button
+                bgColor="transparent"
+                color="yellow"
+                name="Reset"
+                onClick={() => handleFormReset()}
+              />
+            </div>}
         </aside>
 
         <aside className={styles.rightaside}>
@@ -216,9 +250,11 @@ const FormPage: React.FC = () => {
                       color="white"
                       name="Confirm"
                       onClick={() => {
-                        reDirectToHomePage();
-                        setFormCompleted(true);
-                        setTimeout(() => changePage(setFormStarted(false)), 2000);
+                        StateController(setFormCompleted(true));
+                        setTimeout(
+                          () => StateController(setFormStarted(false)),
+                          2000
+                        );
                       }}
                     />
                   : <Button
@@ -231,34 +267,39 @@ const FormPage: React.FC = () => {
         </aside>
       </div>
 
-      <footer className={styles.footer}>
-        {currentPage === 0
-          ? <div />
-          : <Button
-              bgColor="transparent"
-              color="gray"
-              name="Go back"
-              onClick={handleGoBack}
-            />}
+      {isFormCompleted
+        ? <div />
+        : <footer className={styles.footer}>
+            {currentPage === 0
+              ? <div />
+              : <Button
+                  bgColor="transparent"
+                  color="gray"
+                  name="Go back"
+                  onClick={handleGoBack}
+                />}
 
-        {currentPage === 3
-          ? <Button
-              bgColor="rgba(72, 62, 255, 1)"
-              color="white"
-              name="Confirm"
-              onClick={() => {
-                reDirectToHomePage();
-                setFormCompleted(true);
-                setTimeout(() => changePage(setFormStarted(false)), 2000);
-              }}
-            />
-          : <Button
-              bgColor=""
-              color="white"
-              name="Next Page"
-              onClick={handleNextPage}
-            />}
-      </footer>
+            {currentPage === 3
+              ? <Button
+                  bgColor="rgba(72, 62, 255, 1)"
+                  color="white"
+                  name="Confirm"
+                  onClick={() => {
+                    // reDirectToHomePage();
+                    StateController(setFormCompleted(true));
+                    setTimeout(
+                      () => StateController(setFormStarted(false)),
+                      2000
+                    );
+                  }}
+                />
+              : <Button
+                  bgColor=""
+                  color="white"
+                  name="Next Page"
+                  onClick={handleNextPage}
+                />}
+          </footer>}
     </main>
   );
 };

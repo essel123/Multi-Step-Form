@@ -1,72 +1,82 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import SelectedAdon from "../../atoms/SelectedAdon/SelectedAdon";
 import { SelectedPlan } from "../../atoms/SelectedPlan/SelectedPlan";
 import styles from "./Finishing.module.css";
+import { useAppSelector } from "../../../reduxState/types";
+import { setTotalPrice } from "../../../reduxState/stateSlice";
+import { PageController } from "../../../function/Functions";
 
-type Props = {
+type FinishingProps = {
   onClick: () => void;
 };
 
-interface SelectedAddonData {
-  name: string;
-  plan: string;
-}
+// interface SelectedAddonData {
+//   name: string;
+//   plan: string;
+// }
 
-const Finishing: React.FC<Props> = ({ onClick }) => {
-  const [selectedAddons, setSelectedAddons] = useState<SelectedAddonData[]>([]);
-  const plan = localStorage.getItem("plan");
+const Finishing: React.FC<FinishingProps> = ({ onClick }) => {
+  const yearly = useAppSelector(state => state.pageState.yearly);
+  const pricing = useAppSelector(
+    state => state.pageState.formData.plan.pricing
+  );
+
+  const storedAddons = useAppSelector(state => state.pageState.adonData);
+  const planoption = useAppSelector(
+    state => state.pageState.formData.plan.title
+  );
+
+  const controller = PageController();
+  const totalPrice = useAppSelector(state => state.pageState.totalPrice);
+
+  const services = storedAddons;
+  // Initialize sum variable
 
   useEffect(() => {
-    const storedAddons = localStorage.getItem("selectedAddons");
-    if (storedAddons) {
-      setSelectedAddons(JSON.parse(storedAddons));
-    }
-  }, []);
-  const extractPrice = (plan: string) => {
-    const price = parseInt(plan.split("/")[0]); // Remove "mo" or "yr" and parse the number
-    return isNaN(price) ? 0 : price;
-  };
+    let totalSum = 0;
+    const planPrice = parseFloat(pricing.replace(/[^0-9.]/g, ""));
 
-  // Calculate total price by adding up the extracted prices from selected add-ons
-  const totalAddonsPrice = selectedAddons.reduce((total, addon) => {
-    return total + extractPrice(addon.plan);
-  }, 0);
+    services.forEach(service => {
+      const adonsTotal = parseFloat(service.plan.replace(/[^0-9.]/g, ""));
+      if (!isNaN(adonsTotal)) {
+        totalSum += adonsTotal;
+      }
+    });
+
+    controller(setTotalPrice(totalSum + planPrice));
+  }, []);
 
   return (
     <div className="slide-in">
       <div className={styles.section}>
         <main className={styles.main}>
-          <div>
-            <SelectedPlan
-              name={`${localStorage.getItem("planoption")}`}
-              term={plan === "true" ? "Yearly" : "Monthly"}
-              rate={parseInt(`${localStorage.getItem("planvalue")}`)}
-              term_={plan === "true" ? "yr" : "mon"}
-              onClick={onClick}
-            />
-          </div>
+          <SelectedPlan
+            name={planoption}
+            term={yearly ? "Yearly" : "Monthly"}
+            rate={pricing}
+            onClick={onClick}
+          />
+
           <div className={styles.line} />
-          {selectedAddons.length > 0
-            ? selectedAddons.map(addon => {
+          {storedAddons.length > 0
+            ? storedAddons.map(addon => {
                 return (
                   <SelectedAdon
                     key={addon.name}
                     title={addon.name}
                     price={parseInt(addon.plan)}
-                    term={plan === "true" ? "yr" : "mon"}
+                    term={yearly ? "yr" : "mon"}
                   />
                 );
               })
             : <p>No add-ons selected.</p>}
         </main>
-
         <div className={styles.total}>
           <h2>
-            Total (per {plan === "true" ? "year" : "month"})
+            Total (per {yearly ? "year" : "month"})
           </h2>
           <h3>
-            ${totalAddonsPrice +
-              parseInt(`${localStorage.getItem("planvalue")}`)}/{plan === "true" ? "yr" : "mon"}
+            ${totalPrice}
           </h3>
         </div>
       </div>

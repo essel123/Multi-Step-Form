@@ -43,6 +43,7 @@
   height: 20px;
   cursor: pointer;
   -webkit-appearance: none;
+  border-radius: 3px 
 }
 
 .checkbox:checked {
@@ -62,6 +63,7 @@
 
 .section input[type="checkbox"]:checked {
   border-color: green;
+  ;
 }
 
 .leftside {
@@ -73,7 +75,7 @@
 
 @media (max-width: 450px) {
   .section {
-    padding: 15px 15px;
+    padding: 10px;
   }
 
   .name {
@@ -81,11 +83,21 @@
   }
 
   .description {
-    font-size: 12px;
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 20px;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    
   }
 
   .plan {
     font-size: 12px;
+  }
+
+  .section{
+    border-radius: 5px;
   }
 }
 
