@@ -1,0 +1,86 @@
+
+
+.section {
+  margin-top: 40px;
+  padding: 15px 10px;
+  margin-right: 50px;
+  width: 100%;
+  max-width: 160px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.benefit {
+  font-family: 'ubuntu-regular';
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 13.79px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  color: rgba(2, 41, 89, 1);
+}
+
+.section:hover {
+  border: 1px solid rgba(72, 62, 255, 1);
+}
+
+.section:active {
+  border: 1px solid rgba(72, 62, 255, 1);
+}
+
+.icon {
+  width: 40px;
+}
+
+.textsection {
+  margin-top: 30px;
+  width: 100px;
+}
+
+.title {
+  font-family: 'ubuntu-Medium';
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 18.38px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  color: rgba(2, 41, 89, 1);
+}
+
+.planprice {
+  margin-top: 10px;
+  font-family: 'ubuntu-Medium';
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  color: rgba(150, 153, 170, 1);
+}
+
+@media (max-width: 450px) {
+
+  *{
+    padding: 0px;
+    margin: 0px;
+  }
+  .section {
+    margin-top: 12px;
+    padding: auto;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 10px;
+    max-width: 375px !important;
+    width: 100%;
+    padding: 5px;
+  }
+
+  .textsection {
+    margin-top: 0px;
+  }
+}
